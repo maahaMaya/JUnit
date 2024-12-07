@@ -36,4 +36,15 @@ public class BookService {
 		}
 		return bookIds.toArray(new String[bookIds.size()]);
 	}
+	
+	
+	public List<String> getBookTitlesByPublisher(String publisher) {
+		List<String> bookTitles = new ArrayList<>();
+		for(Book book : listOfBooks) {
+			if(publisher.equals(book.getPublisher())) {
+				bookTitles.add(book.getTitle());
+			}
+		}
+		return bookTitles;
+	}
 }
