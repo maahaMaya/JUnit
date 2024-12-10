@@ -27,7 +27,6 @@ public class AssertTimeoutPreemptivelyDemo {
 		assertTimeoutPreemptively(Duration.ofMillis(1), () -> {
 			actualTitles.addAll(bookService.getBookTitlesByPublisher("Wrox"));
 		});
-		
 		assertEquals(1000, actualTitles.size());
 		
 	}
