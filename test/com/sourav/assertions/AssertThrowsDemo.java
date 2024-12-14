@@ -1,5 +1,6 @@
 package com.sourav.assertions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class AssertThrowsDemo {
 		BookNotFoundException bookNotFoundException = assertThrows(BookNotFoundException.class, 
 				() -> bookService.getBookByTitle("Head First Spring"));
 		
-		assertEquals("Book not found in Bookstore!", bookNotFoundException.getMessage());
+		assertEquals ("Book not found in Bookstore!", bookNotFoundException.getMessage());
 	}
 	
 	@Test
