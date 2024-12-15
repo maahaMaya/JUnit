@@ -9,14 +9,14 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_METHOD)
-public class LifecycleDemo {
+public class LifecyclePerMethodDemo {
 
 	@BeforeAll
 	public static void beforeAll() {
 		System.out.println("@BeforeAll got executed !!!");
 	}
 	
-	public LifecycleDemo() {
+	public LifecyclePerMethodDemo() {
 		System.out.println("Constructor got executed !!!");
 	}
 	
