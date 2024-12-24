@@ -1,6 +1,10 @@
 package com.sourav.dynamicTest;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +13,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.print.DocFlavor.INPUT_STREAM;
+
+import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
@@ -104,6 +111,20 @@ public class DynamicTestDemo {
 		}
 		
 		return dynamicTests.toArray(new DynamicTest[dynamicTests.size()]);
+	}
+	
+	@TestFactory
+	public Stream<DynamicNode> dynamicTestsWithDynamicContainers(){
+		return createInputList().stream()
+				.map(input -> 
+				dynamicContainer("Container for " + input, Stream.of(
+						DynamicTest.dynamicTest("not null", () -> assertNotNull(input)),
+						dynamicContainer("properties test " + input, Stream.of(
+								DynamicTest.dynamicTest("length > 0", () -> assertTrue(input.length() > 0)),
+								DynamicTest.dynamicTest("not empty", () -> assertFalse(input.isEmpty()))
+						))
+				)) 
+			);
 	}
 	
 	private List<String> createInputList(){
